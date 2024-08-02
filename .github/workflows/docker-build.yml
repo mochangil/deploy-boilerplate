@@ -1,0 +1,64 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push Backend
+      uses: docker/build-push-action@v2
+      with:
+        context: ./backend
+        file: ./backend/Dockerfile
+        platforms: linux/arm64
+        push: true
+        tags: ${{ secrets.DOCKER_REPOSITORY_BACKEND }}:latest
+
+    - name: Verify Backend Docker Hub
+      run: docker pull ${{ secrets.DOCKER_REPOSITORY_BACKEND }}:latest
+
+  build-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push Frontend
+      uses: docker/build-push-action@v2
+      with:
+        #Docker build 할때 Dockerfile 자체의 경로가 아닌 Dockerfile이 속한 디렉토리를 명시하는 것과 비슷한 맥락인것 같다.
+        context: ./frontend/my-counter-app
+        file: ./frontend/my-counter-app/Dockerfile
+        platforms: linux/arm64
+        push: true
+        tags: ${{ secrets.DOCKER_REPOSITORY_FRONTEND }}:latest
+
+    - name: Verify Frontend Docker Hub
+      run: docker pull ${{ secrets.DOCKER_REPOSITORY_FRONTEND }}:latest
