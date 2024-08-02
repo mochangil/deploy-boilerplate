@@ -1,0 +1,23 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./frontend/my-counter-app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80" # Nginx serves on port 80 inside the container, mapped to port 3000 on localhost
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
