@@ -1,5 +1,5 @@
 package com.example.demo.dto;
 
-public record CounterRequestDto(
+public record CounterSaveRequestDto(
         int value
 ){}
