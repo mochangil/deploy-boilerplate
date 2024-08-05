@@ -78,11 +78,11 @@ jobs:
         git clone https://github.com/mochangil/k8s-manifest-boilerplate
         cd k8s-manifest-boilerplate
 
-        sed -i "s|newTag: .*|newTag: \${{ github.sha }}|g" backend/overlays/dev/kustomization.yml
-        sed -i "s|newTag: .*|newTag: \${{ github.sha }}|g" frontend/overlays/dev/kustomization.yml
+        sed -i '' 's|newTag: .*|newTag: ${{ github.sha }}|g' backend/overlays/dev/kustomization.yml
+        sed -i '' 's|newTag: .*|newTag: ${{ github.sha }}|g' frontend/overlays/dev/kustomization.yml
 
         git config user.name "github-actions"
         git config user.email "github-actions@github.com"
         git add .
         git commit -m "Update image to mo991207/counter-springboot-app:${{ github.sha }}"
-        git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/mochangil/k8s-manifest-boilerplate
+        git push https://x-access-token:${{ secrets.TOKEN_K8S_REPO }}@github.com/mochangil/k8s-manifest-boilerplate
