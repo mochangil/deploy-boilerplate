@@ -78,8 +78,8 @@ jobs:
         git clone https://github.com/mochangil/k8s-manifest-boilerplate
         cd k8s-manifest-boilerplate
 
-        sed -i 's|newTag: .*|newTag: ${{ github.sha }}|g' backend/overlays/dev/kustomization.yml
-        sed -i 's|newTag: .*|newTag: ${{ github.sha }}|g' frontend/overlays/dev/kustomization.yml
+        sed -i 's|newTag: .*|newTag: ${{ github.sha }}|g' overlays/dev/kustomization.yml
+        sed -i 's|newTag: .*|newTag: ${{ github.sha }}|g' overlays/dev/kustomization.yml
 
         git config user.name "github-actions"
         git config user.email "github-actions@github.com"
