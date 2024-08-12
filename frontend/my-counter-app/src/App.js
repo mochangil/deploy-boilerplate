@@ -5,13 +5,13 @@ function App() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    fetch('https://19e0-59-12-209-121.ngrok-free.app/api/counter')
+    fetch('/api/counter')
       .then(response => response.json())
       .then(data => setCount(data));
   }, []);
 
   const incrementCount = () => {
-    fetch('https://19e0-59-12-209-121.ngrok-free.app/api/counter/increment', {
+    fetch('/api/counter/increment', {
       method: 'POST',
     })
       .then(response => response.json())
