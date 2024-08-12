@@ -4,11 +4,11 @@ import './App.css';
 function App() {
   const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    fetch('/api/counter')
-      .then(response => response.json())
-      .then(data => setCount(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch('/api/counter')
+  //     .then(response => response.json())
+  //     .then(data => setCount(data));
+  // }, []);
 
   const incrementCount = () => {
     fetch('/api/counter/increment', {
