@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/counter")
-@CrossOrigin(origins = "http://localhost:3000") // React 개발 서버에서의 요청 허용
+@CrossOrigin(origins = {"http://localhost:3000","https://9694-211-244-225-211.ngrok-free.app"}) // React 개발 서버에서의 요청 허용
 public class CounterController {
 
     private final CounterService counterService;
